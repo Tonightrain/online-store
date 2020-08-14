@@ -28,4 +28,11 @@ public class ProductService {
                 item ->Product.builder().proName(item.getProName()).price(item.getPrice())
                         .unit(item.getUnit()).url(item.getUrl()).build()).collect(Collectors.toList());
     }
+
+    public boolean addOneProduct(Product product) {
+        ProductEntity productEntity = ProductEntity.builder().proName(product.getProName())
+                .price(product.getPrice()).unit(product.getUnit()).url(product.getUrl()).build();
+        productRepository.save(productEntity);
+        return true;
+    }
 }
