@@ -18,6 +18,7 @@ public class Product {
     private String proName;
 
     @NotNull
+//    @Pattern(regexp = "\\d")
     private Integer price;
 
     @NotNull

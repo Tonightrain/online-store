@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,6 +34,9 @@ public class ProductService {
     }
 
     public boolean addOneProduct(Product product){
+        if (!(product.getPrice() instanceof Integer)){
+            return false;
+        }
         ProductEntity productEntity = ProductEntity.builder().proName(product.getProName())
                 .price(product.getPrice()).unit(product.getUnit()).url(product.getUrl()).build();
         productRepository.save(productEntity);

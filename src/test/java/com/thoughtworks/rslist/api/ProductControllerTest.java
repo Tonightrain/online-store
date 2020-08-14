@@ -62,4 +62,13 @@ class ProductControllerTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.error",is("invalid data")));
     }
+
+    @Test
+    void priceShouldBeNum() throws Exception{
+        String productJson = "{\"proName\":\"雪碧\",\"price\":\"five\",\"unit\":\"瓶\",\"url\":\"/img\"}";
+        mockMvc.perform(post("/product/add").content(productJson).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
+
 }
