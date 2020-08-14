@@ -27,7 +27,10 @@ public class ProductController {
     @PostMapping("/product/add")
     public ResponseEntity addOneProduct(@RequestBody @Valid Product product){
         boolean flag = productService.addOneProduct(product);
-        return  flag?ResponseEntity.created(null).build() : ResponseEntity.badRequest().build();
+        if (flag == false){
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.created(null).build();
     }
 
 }

@@ -28,7 +28,8 @@ public class ProductEntity {
     private Integer price;
 
     private String unit;
-
     private String url;
+
+
 }
 

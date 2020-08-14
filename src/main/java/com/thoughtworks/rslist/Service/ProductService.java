@@ -37,6 +37,12 @@ public class ProductService {
         if (!(product.getPrice() instanceof Integer)){
             return false;
         }
+        List<ProductEntity> productEntities = productRepository.findAll();
+//        for (ProductEntity productEntity : productEntities){
+//            if (productEntity.getProName() == product.getProName()){
+//                return false;
+//            }
+//        }
         ProductEntity productEntity = ProductEntity.builder().proName(product.getProName())
                 .price(product.getPrice()).unit(product.getUnit()).url(product.getUrl()).build();
         productRepository.save(productEntity);

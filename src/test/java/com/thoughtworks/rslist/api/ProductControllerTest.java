@@ -69,6 +69,4 @@ class ProductControllerTest {
         mockMvc.perform(post("/product/add").content(productJson).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
     }
-
-
 }
