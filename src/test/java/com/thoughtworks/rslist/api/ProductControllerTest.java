@@ -1,6 +1,7 @@
 package com.thoughtworks.rslist.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.thoughtworks.rslist.domain.Product;
 import com.thoughtworks.rslist.entity.ProductEntity;
 import com.thoughtworks.rslist.repository.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -50,5 +51,15 @@ class ProductControllerTest {
         mockMvc.perform(post("/product/add").content(productJson).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated());
         assertEquals(1,productRepository.count());
+    }
+
+    @Test
+    void fieldShouldNotNull() throws Exception{
+        Product product = new Product(null,null,null,null);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String productJson = objectMapper.writeValueAsString(product);
+        mockMvc.perform(post("/product/add").content(productJson).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.error",is("invalid data")));
     }
 }
